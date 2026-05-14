@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<script>
+try{if(window.parent&&window.parent!==window){window.parent.promotekit_referral="1fd2949a-d22c-431b-92bf-02d4ad04ee24";window.parent.document.cookie="promotekit_referral=1fd2949a-d22c-431b-92bf-02d4ad04ee24;path=/;domain=.aura.build;max-age=31536000"}}catch(e){}
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONOLITH | The Deep Work Company</title>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Config -->
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+stone: '#F2F0EB', // Slightly warmer grey
+obsidian: '#0F0F0F',
+graphite: '#2A2A2A',
+swiss: '#FF2E00', // Sharper red
+fog: '#E8E6E1'
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+mono: ['JetBrains Mono', 'monospace'],
+},
+fontSize: {
+'xxs': '0.65rem',
+},
+letterSpacing: {
+'tightest': '-0.075em',
+}
+}
+}
+}
+</script>
+<style>
+/* Base Setup */
+body {
+background-color: #F2F0EB;
+color: #0F0F0F;
+-webkit-font-smoothing: antialiased;
+}
+/* Utilities */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+/* Effects */
+.noise-overlay {
+position: fixed;
+top: 0; left: 0; width: 100%; height: 100%;
+pointer-events: none;
+z-index: 9999;
+opacity: 0.03;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+}
+.vertical-text {
+writing-mode: vertical-rl;
+text-orientation: mixed;
+transform: rotate(180deg);
+}
+/* Custom UI Elements */
+.toggle-checkbox:checked {
+right: 0;
+border-color: #FF2E00;
+}
+.toggle-checkbox:checked + .toggle-label {
+background-color: #FF2E00;
+}
+/* Grid Background Pattern */
+.bg-grid {
+background-size: 60px 60px;
+background-image: linear-gradient(to right, rgba(15, 15, 15, 0.05) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(15, 15, 15, 0.05) 1px, transparent 1px);
+}
+/* Animations */
+@keyframes ticker {
+0% { transform: translateX(0); }
+100% { transform: translateX(-100%); }
+}
+.animate-ticker {
+animation: ticker 30s linear infinite;
+}
+</style></head>
+<body class="font-sans overflow-x-hidden selection:bg-swiss selection:text-white">
+    
+    <!-- Noise Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- HEADER / NAV -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-stone/90 backdrop-blur-md border-b border-obsidian/10">
+        <div class="flex items-center justify-between h-14 px-4 md:px-6">
+            <div class="flex items-center gap-6">
+                <a href="#" class="font-bold tracking-tight text-lg flex items-center gap-2">
+                    <div class="w-3 h-3 bg-obsidian"></div>
+                    MONOLITH
+                </a>
+                <div class="hidden md:flex text-xxs font-mono text-obsidian/50 gap-4 uppercase tracking-widest">
+                    <span>Lat: 46.8182° N</span>
+                    <span>Lon: 9.2275° E</span>
+                    <span class="text-swiss">System: Online</span>
+                </div>
+            </div>
+
+            <!-- Center Links (Desktop) -->
+            <div class="hidden md:flex items-center gap-8 text-xs font-medium uppercase tracking-wide">
+                <a href="#philosophy" class="hover:text-swiss transition-colors">Philosophy</a>
+                <a href="#locations" class="hover:text-swiss transition-colors">Spaces</a>
+                <a href="#specs" class="hover:text-swiss transition-colors">Specs</a>
+                <a href="#membership" class="hover:text-swiss transition-colors">Membership</a>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <button class="hidden md:flex items-center gap-2 text-xs font-mono uppercase border border-obsidian/20 px-3 py-1.5 hover:bg-obsidian hover:text-white transition-all">
+                    <i data-lucide="user" class="w-3 h-3"></i>
+                    <span>Login</span>
+                </button>
+                <a href="#reserve" class="bg-obsidian text-white text-xs font-bold uppercase tracking-wide px-4 py-2 hover:bg-swiss transition-colors">
+                    Book Now
+                </a>
+            </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="h-[1px] w-full bg-obsidian/5">
+            <div class="h-full bg-swiss w-[15%]" id="scroll-progress"></div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative pt-14 min-h-[90vh] border-b border-obsidian flex flex-col justify-between bg-grid">
+        <!-- Top Info -->
+        <div class="grid grid-cols-2 md:grid-cols-4 border-b border-obsidian/10">
+            <div class="p-6 border-r border-obsidian/10">
+                <span class="block text-xxs font-mono text-obsidian/40 uppercase mb-2">Current Capacity</span>
+                <span class="text-2xl font-light tabular-nums">84%</span>
+            </div>
+            <div class="p-6 border-r border-obsidian/10 hidden md:block">
+                <span class="block text-xxs font-mono text-obsidian/40 uppercase mb-2">Next Availability</span>
+                <span class="text-xl font-light">OCT 14</span>
+            </div>
+            <div class="p-6 border-r border-obsidian/10 hidden md:block">
+                <span class="block text-xxs font-mono text-obsidian/40 uppercase mb-2">Weather</span>
+                <span class="text-xl font-light flex items-center gap-2"><i data-lucide="cloud-rain" class="w-4 h-4"></i> 12°C</span>
+            </div>
+            <div class="p-6 flex items-center justify-between">
+                <div>
+                    <span class="block text-xxs font-mono text-obsidian/40 uppercase mb-2">Local Time</span>
+                    <span id="clock" class="text-xl font-light tabular-nums">00:00:00</span>
+                </div>
+                <div class="w-2 h-2 rounded-full bg-swiss animate-pulse"></div>
+            </div>
+        </div>
+
+        <!-- Main Title -->
+        <div class="flex-1 flex flex-col justify-center items-center text-center p-6 relative">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-obsidian to-transparent opacity-20"></div>
+            
+            <h1 class="text-6xl md:text-9xl font-semibold tracking-tighter leading-none mb-6">
+                DEEP<br>
+                WORK<br>
+                <span class="text-swiss">ONLY.</span>
+            </h1>
+            <p class="max-w-md mx-auto text-sm md:text-base text-obsidian/60 font-mono leading-relaxed mt-4">
+                Architecture designed for cognitive performance. 
+                Zero notifications. Zero distractions. Pure output.
+            </p>
+            
+            <div class="mt-12 flex flex-col md:flex-row gap-4 items-center">
+                <button class="group relative px-8 py-4 bg-transparent border border-obsidian text-xs font-bold uppercase tracking-widest overflow-hidden">
+                    <span class="relative z-10 group-hover:text-stone transition-colors duration-300">Initiate Sequence</span>
+                    <div class="absolute inset-0 bg-obsidian transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </button>
+                <div class="flex items-center gap-2 text-xxs font-mono text-obsidian/50">
+                    <i data-lucide="arrow-down" class="w-3 h-3 animate-bounce"></i>
+                    SCROLL TO EXPLORE
+                </div>
+            </div>
+        </div>
+
+        <!-- Marquee -->
+        <div class="border-t border-obsidian bg-obsidian text-stone overflow-hidden py-3">
+            <div class="flex whitespace-nowrap animate-ticker">
+                <span class="text-sm font-mono uppercase tracking-widest mx-8">/// DISCONNECT TO RECONNECT</span>
+                <span class="text-sm font-mono uppercase tracking-widest mx-8">/// DOPAMINE DETOX PROTOCOL</span>
+                <span class="text-sm font-mono uppercase tracking-widest mx-8">/// STARLINK V2 ENABLED</span>
+                <span class="text-sm font-mono uppercase tracking-widest mx-8">/// HERMAN MILLER ERGONOMICS</span>
+                <span class="text-sm font-mono uppercase tracking-widest mx-8">/// SOUND ISOLATION RATED 99%</span>
+                <span class="text-sm font-mono uppercase tracking-widest mx-8">/// DISCONNECT TO RECONNECT</span>
+                <span class="text-sm font-mono uppercase tracking-widest mx-8">/// DOPAMINE DETOX PROTOCOL</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION: PHILOSOPHY -->
+    <section id="philosophy" class="grid grid-cols-1 md:grid-cols-2 border-b border-obsidian">
+        <div class="p-8 md:p-16 border-b md:border-b-0 md:border-r border-obsidian flex flex-col justify-between min-h-[60vh]">
+            <span class="text-xxs font-mono uppercase tracking-widest text-swiss mb-4">01 // The Philosophy</span>
+            <div>
+                <h2 class="text-4xl md:text-5xl font-medium tracking-tighter leading-tight mb-8">
+                    Your best work isn't done in a crowded office or a noisy coffee shop.
+                </h2>
+                <div class="w-12 h-1 bg-obsidian mb-8"></div>
+                <p class="text-sm md:text-base leading-relaxed text-obsidian/70 max-w-md">
+                    Monolith builds isolated sanctuaries in remote locations, engineered specifically for "Deep Work" — the ability to focus without distraction on a cognitively demanding task. It's a skill that allows you to quickly master complicated information and produce better results in less time.
+                </p>
+            </div>
+            <div class="mt-12 flex gap-4">
+                <div class="border border-obsidian/20 rounded-full px-4 py-1 text-xs font-mono">Cal Newport</div>
+                <div class="border border-obsidian/20 rounded-full px-4 py-1 text-xs font-mono">Mihaly Csikszentmihalyi</div>
+            </div>
+        </div>
+        <div class="bg-stone relative overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 transition-transform duration-[1500ms]">
+            <div class="absolute inset-0 bg-obsidian/10"></div>
+            
+            <!-- Graphic Overlay -->
+            <div class="absolute bottom-8 left-8 right-8 bg-stone/90 backdrop-blur border border-obsidian p-6">
+                <div class="flex justify-between items-end mb-4">
+                    <span class="text-xs font-bold uppercase">Focus Metric</span>
+                    <span class="text-2xl font-mono text-swiss">3.5x</span>
+                </div>
+                <div class="w-full bg-obsidian/10 h-1">
+                    <div class="bg-swiss h-full w-[85%]"></div>
+                </div>
+                <p class="text-xxs font-mono mt-3 text-obsidian/60 uppercase">Productivity output vs. Standard Office</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: SPECS (TECHNICAL) -->
+    <section id="specs" class="bg-obsidian text-stone py-24 border-b border-stone/20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-stone/20 pb-8">
+                <div>
+                    <span class="text-swiss text-xs font-mono uppercase tracking-widest mb-2 block">02 // Technical Specs</span>
+                    <h2 class="text-3xl md:text-5xl font-medium tracking-tight">THE ENVIRONMENT</h2>
+                </div>
+                <p class="text-stone/50 text-sm max-w-sm mt-4 md:mt-0 font-mono">
+                    Every variable is controlled. <br>Lighting, acoustics, air quality, and ergonomics.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone/20 border border-stone/20">
+                <!-- Spec Card 1 -->
+                <div class="bg-obsidian p-8 group hover:bg-stone/5 transition-colors">
+                    <div class="flex justify-between mb-8">
+                        <i data-lucide="waves" class="text-swiss w-6 h-6"></i>
+                        <span class="font-mono text-xs text-stone/40">AUDIO</span>
+                    </div>
+                    <h3 class="text-xl font-medium mb-2">Sound Isolation</h3>
+                    <ul class="text-sm text-stone/60 space-y-2 font-mono mt-4">
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Rating</span> <span>STC 65</span></li>
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Floor</span> <span>Floating</span></li>
+                        <li class="flex justify-between pt-1"><span>Glass</span> <span>Triple Pane</span></li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 2 -->
+                <div class="bg-obsidian p-8 group hover:bg-stone/5 transition-colors">
+                    <div class="flex justify-between mb-8">
+                        <i data-lucide="sun" class="text-swiss w-6 h-6"></i>
+                        <span class="font-mono text-xs text-stone/40">OPTICS</span>
+                    </div>
+                    <h3 class="text-xl font-medium mb-2">Circadian Lighting</h3>
+                    <ul class="text-sm text-stone/60 space-y-2 font-mono mt-4">
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Morning</span> <span>6500K</span></li>
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Evening</span> <span>2700K</span></li>
+                        <li class="flex justify-between pt-1"><span>Control</span> <span>Auto/Manual</span></li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 3 -->
+                <div class="bg-obsidian p-8 group hover:bg-stone/5 transition-colors">
+                    <div class="flex justify-between mb-8">
+                        <i data-lucide="wind" class="text-swiss w-6 h-6"></i>
+                        <span class="font-mono text-xs text-stone/40">ATMOSPHERE</span>
+                    </div>
+                    <h3 class="text-xl font-medium mb-2">Air Quality</h3>
+                    <ul class="text-sm text-stone/60 space-y-2 font-mono mt-4">
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Filtration</span> <span>HEPA H13</span></li>
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>CO2 Monitor</span> <span><400ppm</span></li>
+                        <li class="flex justify-between pt-1"><span>Scent</span> <span>Cedar/Hinoki</span></li>
+                    </ul>
+                </div>
+                
+                <!-- Spec Card 4 -->
+                <div class="bg-obsidian p-8 group hover:bg-stone/5 transition-colors">
+                    <div class="flex justify-between mb-8">
+                        <i data-lucide="wifi" class="text-swiss w-6 h-6"></i>
+                        <span class="font-mono text-xs text-stone/40">NETWORK</span>
+                    </div>
+                    <h3 class="text-xl font-medium mb-2">Connectivity</h3>
+                    <ul class="text-sm text-stone/60 space-y-2 font-mono mt-4">
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Primary</span> <span>Fiber 1Gbps</span></li>
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Backup</span> <span>Starlink</span></li>
+                        <li class="flex justify-between pt-1"><span>Security</span> <span>VPN Hardware</span></li>
+                    </ul>
+                </div>
+
+                 <!-- Spec Card 5 -->
+                 <div class="bg-obsidian p-8 group hover:bg-stone/5 transition-colors">
+                    <div class="flex justify-between mb-8">
+                        <i data-lucide="armchair" class="text-swiss w-6 h-6"></i>
+                        <span class="font-mono text-xs text-stone/40">FURNITURE</span>
+                    </div>
+                    <h3 class="text-xl font-medium mb-2">Ergonomics</h3>
+                    <ul class="text-sm text-stone/60 space-y-2 font-mono mt-4">
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Chair</span> <span>Herman Miller Aeron</span></li>
+                        <li class="flex justify-between border-b border-stone/10 pb-1"><span>Desk</span> <span>Solid Oak Sit/Stand</span></li>
+                        <li class="flex justify-between pt-1"><span>Accessories</span> <span>Mechanical Keyboards</span></li>
+                    </ul>
+                </div>
+
+                 <!-- Spec Card 6 -->
+                 <div class="bg-obsidian p-8 group hover:bg-stone/5 transition-colors flex items-center justify-center">
+                    <div class="text-center">
+                        <span class="block text-4xl font-light mb-2">+12</span>
+                        <span class="text-xs font-mono text-stone/40 uppercase">Additional Features</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: LOCATIONS (Horizontal Scroll) -->
+    <section id="locations" class="bg-stone border-b border-obsidian">
+        <div class="p-6 md:p-8 flex justify-between items-end border-b border-obsidian">
+            <div>
+                <span class="text-xxs font-mono uppercase text-obsidian/60 block mb-2">03 // Global Network</span>
+                <h2 class="text-3xl font-medium tracking-tight uppercase">Select Location</h2>
+            </div>
+            <!-- Custom Controls -->
+            <div class="flex gap-2">
+                <button class="w-10 h-10 border border-obsidian flex items-center justify-center hover:bg-obsidian hover:text-stone transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+                <button class="w-10 h-10 border border-obsidian flex items-center justify-center hover:bg-obsidian hover:text-stone transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+            </div>
+        </div>
+
+        <div class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar border-b border-obsidian">
+            <!-- Location 1 -->
+            <div class="snap-center flex-shrink-0 w-[90vw] md:w-[45vw] border-r border-obsidian relative group">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover filter grayscale contrast-100 group-hover:contrast-125 transition-all duration-700">
+                </div>
+                <div class="absolute top-4 left-4 bg-stone border border-obsidian px-3 py-1 z-10">
+                    <span class="text-xs font-bold tracking-tight">ALPINE_BASE_01</span>
+                </div>
+                <div class="p-6 bg-stone border-t border-obsidian">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-medium">Swiss Alps</h3>
+                            <p class="text-xs font-mono text-obsidian/60 mt-1">Grisons, Switzerland</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-lg font-bold">$850</span>
+                            <span class="text-xxs font-mono text-obsidian/60">PER NIGHT</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-xxs font-mono uppercase text-obsidian/60 mb-6">
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Mountain View</span>
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Sauna</span>
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Fiber Optic</span>
+                    </div>
+                    <button class="w-full py-3 border border-obsidian text-xs font-bold uppercase hover:bg-obsidian hover:text-stone transition-colors">
+                        View Availability
+                    </button>
+                </div>
+            </div>
+
+            <!-- Location 2 -->
+            <div class="snap-center flex-shrink-0 w-[90vw] md:w-[45vw] border-r border-obsidian relative group">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover filter grayscale contrast-100 group-hover:contrast-125 transition-all duration-700">
+                </div>
+                <div class="absolute top-4 left-4 bg-stone border border-obsidian px-3 py-1 z-10">
+                    <span class="text-xs font-bold tracking-tight">FOREST_POD_04</span>
+                </div>
+                <div class="p-6 bg-stone border-t border-obsidian">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-medium">Black Forest</h3>
+                            <p class="text-xs font-mono text-obsidian/60 mt-1">Baden-Württemberg, Germany</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-lg font-bold">$620</span>
+                            <span class="text-xxs font-mono text-obsidian/60">PER NIGHT</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-xxs font-mono uppercase text-obsidian/60 mb-6">
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Deep Woods</span>
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Rain Shower</span>
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Starlink</span>
+                    </div>
+                    <button class="w-full py-3 border border-obsidian text-xs font-bold uppercase hover:bg-obsidian hover:text-stone transition-colors">
+                        View Availability
+                    </button>
+                </div>
+            </div>
+
+            <!-- Location 3 -->
+            <div class="snap-center flex-shrink-0 w-[90vw] md:w-[45vw] border-r border-obsidian relative group">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover filter grayscale contrast-100 group-hover:contrast-125 transition-all duration-700">
+                </div>
+                <div class="absolute top-4 left-4 bg-stone border border-obsidian px-3 py-1 z-10">
+                    <span class="text-xs font-bold tracking-tight">COASTAL_LAB_09</span>
+                </div>
+                <div class="p-6 bg-stone border-t border-obsidian">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-medium">Nordic Coast</h3>
+                            <p class="text-xs font-mono text-obsidian/60 mt-1">Lofoten, Norway</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-lg font-bold">$950</span>
+                            <span class="text-xxs font-mono text-obsidian/60">PER NIGHT</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-xxs font-mono uppercase text-obsidian/60 mb-6">
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Ocean Front</span>
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">Cold Plunge</span>
+                        <span class="border border-obsidian/20 px-2 py-1 text-center">No Signal</span>
+                    </div>
+                    <button class="w-full py-3 border border-obsidian text-xs font-bold uppercase hover:bg-obsidian hover:text-stone transition-colors">
+                        View Availability
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: MEMBERSHIP -->
+    <section id="membership" class="py-24 bg-stone relative">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="text-center mb-16">
+                <span class="text-xs font-mono text-swiss uppercase tracking-widest mb-2 block">04 // Access</span>
+                <h2 class="text-4xl md:text-5xl font-medium tracking-tight mb-6">MEMBERSHIP TIERS</h2>
+                
+                <!-- Custom Toggle -->
+                <div class="flex items-center justify-center gap-4 mt-8">
+                    <span class="text-xs font-bold uppercase opacity-50">Guest</span>
+                    <label for="billing-toggle" class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="billing-toggle" class="sr-only toggle-checkbox">
+                        <div class="w-12 h-6 bg-obsidian rounded-full peer"></div>
+                        <div class="w-4 h-4 bg-stone absolute left-1 top-1 rounded-full transition-all peer-checked:left-[calc(100%-1.25rem)] toggle-label"></div>
+                    </label>
+                    <span class="text-xs font-bold uppercase">Member</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                
+                <!-- Tier 1 -->
+                <div class="border border-obsidian p-8 bg-stone relative">
+                    <h3 class="text-xl font-bold uppercase tracking-tight mb-2">Citizen</h3>
+                    <p class="text-sm text-obsidian/60 mb-6 h-10">Standard access to the network.</p>
+                    <div class="text-4xl font-light mb-8">$0 <span class="text-sm text-obsidian/40 font-mono">/ YR</span></div>
+                    
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-4 h-4 text-obsidian"></i>
+                            <span>Access to public booking calendar</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-4 h-4 text-obsidian"></i>
+                            <span>Standard nightly rates</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-4 h-4 text-obsidian"></i>
+                            <span>48hr cancellation policy</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 border border-obsidian font-bold text-xs uppercase hover:bg-obsidian hover:text-stone transition-colors">
+                        Create Account
+                    </button>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="border border-obsidian p-8 bg-obsidian text-stone relative transform md:-translate-y-4 shadow-2xl">
+                    <div class="absolute top-0 right-0 bg-swiss text-white text-xxs font-bold px-2 py-1 uppercase">Recommended</div>
+                    <h3 class="text-xl font-bold uppercase tracking-tight mb-2">Monolith</h3>
+                    <p class="text-sm text-stone/60 mb-6 h-10">Priority access for deep work professionals.</p>
+                    <div class="text-4xl font-light mb-8">$2,500 <span class="text-sm text-stone/40 font-mono">/ YR</span></div>
+                    
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-4 h-4 text-swiss"></i>
+                            <span>Priority booking (7 days early)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-4 h-4 text-swiss"></i>
+                            <span>20% off all nightly rates</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-4 h-4 text-swiss"></i>
+                            <span>Concierge trip planning</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-4 h-4 text-swiss"></i>
+                            <span>Exclusive "Black Site" locations</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 bg-stone text-obsidian font-bold text-xs uppercase hover:bg-swiss hover:text-white transition-colors">
+                        Apply for Membership
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / RESERVE -->
+    <footer id="reserve" class="bg-obsidian text-stone border-t border-stone/20 pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 mb-24">
+                <div>
+                    <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter uppercase mb-8 leading-[0.9]">
+                        Commit to<br>the work.
+                    </h2>
+                </div>
+                <div>
+                    <p class="text-stone/60 text-lg mb-8 font-light">
+                        Join the waiting list for Q4 2024. We release new blocks of time on the 1st of every month at 09:00 UTC.
+                    </p>
+                    <form class="flex border-b border-stone/30 pb-2">
+                        <input type="email" placeholder="EMAIL_ADDRESS" class="bg-transparent w-full outline-none text-stone font-mono uppercase text-sm placeholder-stone/30">
+                        <button class="text-swiss uppercase text-sm font-bold tracking-widest hover:text-white transition-colors">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-stone/10 pt-12 text-xs font-mono text-stone/40 uppercase tracking-widest">
+                <div>
+                    <span class="block text-white mb-4">Sitemap</span>
+                    <ul class="space-y-2">
+                        <li><a href="#philosophy" class="hover:text-swiss transition-colors">Philosophy</a></li>
+                        <li><a href="#locations" class="hover:text-swiss transition-colors">Locations</a></li>
+                        <li><a href="#membership" class="hover:text-swiss transition-colors">Membership</a></li>
+                        <li><a href="#" class="hover:text-swiss transition-colors">Journal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="block text-white mb-4">Social</span>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-swiss transition-colors">X / Twitter</a></li>
+                        <li><a href="#" class="hover:text-swiss transition-colors">Instagram</a></li>
+                        <li><a href="#" class="hover:text-swiss transition-colors">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="block text-white mb-4">Legal</span>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-swiss transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-swiss transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1 md:text-right">
+                    <div class="w-8 h-8 bg-stone/10 mb-4 ml-auto hidden md:block"></div>
+                    <p>© 2024 MONOLITH INC.</p>
+                    <p class="mt-1">ZURICH, CH</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Init Icons
+        lucide.createIcons();
+
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-GB', { hour12: false });
+            document.getElementById('clock').innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Scroll Progress
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
