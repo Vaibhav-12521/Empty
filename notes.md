@@ -4,7 +4,7 @@
 ---
 
 # 🟦 UNIT – I: INTRODUCTION & DIGITAL IMAGE FUNDAMENTALS
-  
+   
 ## 📌 1.1 Digital Image Processing — Definition
 ├── **Definition:** Digital Image Processing (DIP) is the manipulation of a digital image **f(x, y)** using computer algorithms for enhancement, restoration, analysis, compression, or interpretation.
 ├── **Key Points:**
