@@ -9,7 +9,7 @@
 ├── **Definition:** Digital Image Processing (DIP) is the manipulation of a digital image **f(x, y)** using computer algorithms for enhancement, restoration, analysis, compression, or interpretation.
 ├── **Key Points:**
 - Image = 2-D function f(x, y) where x, y = spatial coordinates and f = intensity (gray level)
-- Three abstraction levels: low-level (preprocessing), mid-level (segmentation), high-level (interpretation)
+- Three abstraction levels: low-level (preprocessing), mid-level (segmentation), high-level (interpretation) 
 - Two processing domains: **Spatial** (pixel-based) and **Frequency** (transform-based)
 - Requires **sampling** (spatial discretization) + **quantization** (amplitude discretization)
 - Applied across medicine, remote sensing, robotics, forensics, entertainment
