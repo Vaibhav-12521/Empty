@@ -20,7 +20,7 @@
 ├── **One-line Exam Answer:** Digital Image Processing is the algorithmic manipulation of a digital image f(x, y) for enhancement, restoration, analysis, or compression.
 
 --- 
-
+ 
 ## 📌 1.2 Fields Using Digital Image Processing
 ├── **Definition:** DIP is applied wherever images are captured, analyzed, transmitted, or interpreted in digital form.
 ├── **Key Points:**
