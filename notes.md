@@ -19,6 +19,7 @@
    - **Gray level:** Numerical value of pixel intensity
 ├── **One-line Exam Answer:** Digital Image Processing is the algorithmic manipulation of a digital image f(x, y) for enhancement, restoration, analysis, or compression.
 
+
 ---
 
 ## 📌 1.2 Fields Using Digital Image Processing
