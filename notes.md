@@ -1,5 +1,5 @@
 # IMAGE PROCESSING — COMPLETE SYLLABUS NOTES — UNITS 1 TO 5 
-**Course:** BCA / B.Sc(IT) | **Subject Code:** UCS6105 | **Sem VI**   
+**Course:** BCA / B.Sc(IT) | **Subject Code:** UCS6105 | **Sem VI** 
 
 ---
 
